@@ -1,0 +1,373 @@
+document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById('mycanvas');
+    drawShape();
+    createDeck();
+    canvas.addEventListener('click', function (evt) {
+        var mousePos = getMousePos(canvas, evt);
+  
+        if (isInside(mousePos, rect)) {
+            alert('clicked inside rect');
+        } else {
+            alert('clicked outside rect');
+        }
+    }, false);
+  
+  });
+  
+  let deck=[]
+  let player1=[]
+  let player2=[]
+  let player3=[]
+  let player4=[]
+  let pairs=[]
+  
+  function createDeck(){
+    //Jack's value is 11, King's value is 12, Queen's value is 13. No Jokers
+    //Club=0, Diamond=1, Heart=2, Spade=3
+    for(let i=0; i<4; i++){
+      for(let y=1; y<13; y++){
+        var card={
+          value:""+y,
+          suit:""+i,
+        }
+        if(card.value=="1")
+          card.value="A"
+        else if(card.value=="11")
+          card.value="J"
+        else if(card.value=="12")
+          card.value="K"
+        if(card.suit=="0")
+          card.suit="C"
+        else if(card.suit=="1")
+          card.suit="D"
+        else if(card.suit=="2")
+          card.suit="H"
+        else
+          card.suit="S"
+        deck.push(card)
+      }
+    }
+    var queen={
+      value:"Q",
+      suit:"H",
+    }
+    deck.push(queen)
+  
+    shuffleArray(deck);
+  
+    for(let i=0; i<48; i++)
+    {
+      if(i<12)
+        player1.push(deck[i])
+      else if(i<24)
+        player2.push(deck[i])
+      else if(i<36)
+        player3.push(deck[i])
+      else
+        player4.push(deck[i])
+    }
+    player1.push(deck[48])
+
+    tempDeck=["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K"]
+
+    for(let i=0; i<tempDeck.length; i++)
+    {
+      count=0
+      for(let y=0; y<player1.length; y++)
+      {
+        if(player1[y].value==tempDeck[i]){
+          count++;
+        }
+      }
+      if(count==2 || count==3){
+        for(let x=0; x<player1.length; x++){
+          if(player1[x].value==tempDeck[i]){
+            pairs.push(player1[x])
+            player1.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player1.length; x++){
+          if(player1[x].value==tempDeck[i]){
+            pairs.push(player1[x])
+            player1.splice(x, 1)
+            break;
+          }
+        }
+      }
+      else if(count==4){
+        for(let x=0; x<player1.length; x++){
+          if(player1[x].value==tempDeck[i]){
+            pairs.push(player1[x])
+            player1.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player1.length; x++){
+          if(player1[x].value==tempDeck[i]){
+            pairs.push(player1[x])
+            player1.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player1.length; x++){
+          if(player1[x].value==tempDeck[i]){
+            pairs.push(player1[x])
+            player1.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player1.length; x++){
+          if(player1[x].value==tempDeck[i]){
+            pairs.push(player1[x])
+            player1.splice(x, 1)
+            break;
+          }
+        }
+      }
+    }
+
+
+    for(let i=0; i<tempDeck.length; i++)
+    {
+      count=0
+      for(let y=0; y<player2.length; y++)
+      {
+        if(player2[y].value==tempDeck[i]){
+          count++;
+        }
+      }
+      if(count==2 || count==3){
+        for(let x=0; x<player2.length; x++){
+          if(player2[x].value==tempDeck[i]){
+            pairs.push(player2[x])
+            player2.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player2.length; x++){
+          if(player2[x].value==tempDeck[i]){
+            pairs.push(player2[x])
+            player2.splice(x, 1)
+            break;
+          }
+        }
+      }
+      else if(count==4){
+        for(let x=0; x<player2.length; x++){
+          if(player2[x].value==tempDeck[i]){
+            pairs.push(player2[x])
+            player2.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player2.length; x++){
+          if(player2[x].value==tempDeck[i]){
+            pairs.push(player2[x])
+            player2.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player2.length; x++){
+          if(player2[x].value==tempDeck[i]){
+            pairs.push(player2[x])
+            player2.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player2.length; x++){
+          if(player2[x].value==tempDeck[i]){
+            pairs.push(player2[x])
+            player2.splice(x, 1)
+            break;
+          }
+        }
+      }
+    }
+  
+
+    for(let i=0; i<tempDeck.length; i++)
+    {
+      count=0
+      for(let y=0; y<player3.length; y++)
+      {
+        if(player3[y].value==tempDeck[i]){
+          count++;
+        }
+      }
+      if(count==2 || count==3){
+        for(let x=0; x<player3.length; x++){
+          if(player3[x].value==tempDeck[i]){
+            pairs.push(player3[x])
+            player3.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player3.length; x++){
+          if(player3[x].value==tempDeck[i]){
+            pairs.push(player3[x])
+            player3.splice(x, 1)
+            break;
+          }
+        }
+      }
+      else if(count==4){
+        for(let x=0; x<player3.length; x++){
+          if(player3[x].value==tempDeck[i]){
+            pairs.push(player3[x])
+            player3.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player3.length; x++){
+          if(player3[x].value==tempDeck[i]){
+            pairs.push(player3[x])
+            player3.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player3.length; x++){
+          if(player3[x].value==tempDeck[i]){
+            pairs.push(player3[x])
+            player3.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player3.length; x++){
+          if(player3[x].value==tempDeck[i]){
+            pairs.push(player3[x])
+            player3.splice(x, 1)
+            break;
+          }
+        }
+      }
+    }
+
+
+    for(let i=0; i<tempDeck.length; i++)
+    {
+      count=0
+      for(let y=0; y<player4.length; y++)
+      {
+        if(player4[y].value==tempDeck[i]){
+          count++;
+        }
+      }
+      if(count==2 || count==3){
+        for(let x=0; x<player4.length; x++){
+          if(player4[x].value==tempDeck[i]){
+            pairs.push(player4[x])
+            player4.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player4.length; x++){
+          if(player4[x].value==tempDeck[i]){
+            pairs.push(player4[x])
+            player4.splice(x, 1)
+            break;
+          }
+        }
+      }
+      else if(count==4){
+        for(let x=0; x<player4.length; x++){
+          if(player4[x].value==tempDeck[i]){
+            pairs.push(player4[x])
+            player4.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player4.length; x++){
+          if(player4[x].value==tempDeck[i]){
+            pairs.push(player4[x])
+            player4.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player4.length; x++){
+          if(player4[x].value==tempDeck[i]){
+            pairs.push(player4[x])
+            player4.splice(x, 1)
+            break;
+          }
+        }
+        for(let x=0; x<player4.length; x++){
+          if(player4[x].value==tempDeck[i]){
+            pairs.push(player4[x])
+            player4.splice(x, 1)
+            break;
+          }
+        }
+      }
+    }
+
+
+    console.log("New Player Hands:")
+    console.log(player1)
+    console.log(player2)
+    console.log(player3)
+    console.log(player4)
+    console.log(pairs)
+  }
+  
+  function getMousePos(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+  
+  }
+  
+  var rect = {
+    x: 50,
+    y: 50,
+    width: 200,
+    height: 200,
+  };
+  
+  function isInside(pos, rect) {
+    return pos.x > rect.x && pos.x < rect.x + rect.width && pos.y < rect.y + rect.height && pos.y > rect.y
+  }
+  
+  function drawShape() {
+    var canvas = document.getElementById('mycanvas');
+  
+    // Get the canvas element using the DOM
+  
+    // Make sure we don't execute when canvas isn't supported
+    if (canvas.getContext) {
+  
+        // use getContext to use the canvas for drawing
+        var ctx = canvas.getContext('2d');
+  
+        // Draw shapes
+        ctx.strokeRect(50, 50, 150, 150);
+        var img = new Image(150, 150);
+        img.src = 'cards/2C.png';
+  
+  
+        img.onload = function () {
+            ctx.drawImage(img, 50, 50, img.width, img.height);
+        }
+    } else {
+        alert('You need Safari or Firefox 1.5+ to see this demo.');
+    }
+  }
+  
+  function scalePreserveAspectRatio(imgW, imgH, maxW, maxH) {
+    return (Math.min((maxW / imgW), (maxH / imgH)));
+  }
+  
+  
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+  }
+  
+  

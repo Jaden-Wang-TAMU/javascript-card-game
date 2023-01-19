@@ -1,0 +1,25 @@
+<html>
+   <head>
+    <style>
+        #mycanvas{border:1px solid black;}
+        .center {
+        margin: auto;
+        width: 50%;
+        padding: 3px;
+        font-size:20px;
+        }
+    </style>
+    <title>CardGame</title>
+    <!--Old Maid, four players-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="builder.js"></script>
+   </head>
+
+   <body>
+       <h1 style="margin: auto; font-size:30px; width: 10%;">Old Maid</h1>
+       <p class="center">Select a card from the top row to add to your hand, which is on the bottom row. You want to make pairs.</p>
+       <p class="center">All pairs will be discarded. There are only 3 queens in this deck, so there will be 1 queen left at the end.</p>
+       <p class="center">Whoever ends up with that 1 queen at the end of the game is the Old Maid and loses! Have fun!</p>
+       <canvas id = "mycanvas" width = "1500px" height = "800px" style="margin-left:210px"></canvas>
+   </body>
+</html>
